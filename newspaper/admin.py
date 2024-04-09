@@ -7,7 +7,7 @@ from newspaper.models import Redactor, Topic, Newspaper
 
 @admin.register(Redactor)
 class RedactorAdmin(UserAdmin):
-    list_display = UserAdmin.list_display + ["years_of_experience", ]
+    list_display = UserAdmin.list_display + ("years_of_experience", )
     fieldsets = UserAdmin.fieldsets + (
         (("Additional info", {"fields": ("years_of_experience",)}),)
     )
@@ -34,7 +34,6 @@ class NewspaperAdmin(admin.ModelAdmin):
         "title",
         "published_date",
         "topic",
-        "publishers",
     ]
     search_fields = ["title", ]
     list_filter = [
@@ -45,4 +44,4 @@ class NewspaperAdmin(admin.ModelAdmin):
 
 admin.site.register(Topic)
 
-admin.site.uregister(Group)
+admin.site.unregister(Group)
