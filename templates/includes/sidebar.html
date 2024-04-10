@@ -1,6 +1,6 @@
 <ul class="sidebar-nav list-group">
-  <li class="list-group-item"><a>Home</a></li>
-  <li class="list-group-item"><a>Topics</a></li>
-  <li class="list-group-item"><a>Newspapers</a></li>
-  <li class="list-group-item"><a>Redactors</a></li>
+  <li class="list-group-item"><a href="{% url 'newspaper:index' %}">Home</a></li>
+  <li class="list-group-item"><a href="{% url 'newspaper:topic_list' %}">Topics</a></li>
+  <li class="list-group-item"><a href="{% url 'newspaper:newspaper_list' %}">Newspapers</a></li>
+  <li class="list-group-item"><a href="{% url 'newspaper:redactor_list' %}">Redactors</a></li>
 </ul>
