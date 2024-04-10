@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>{{ redactor }}</h2>
+  <h3><a href="{% url 'newspaper:redactor_update' pk=redactor.id %}">Update</a></h3>
+  <h3><a href="{% url 'newspaper:redactor_delete' pk=redactor.id %}">Delete</a></h3>
+  <br>
+{% endblock %}
