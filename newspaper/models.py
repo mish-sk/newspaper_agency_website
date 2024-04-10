@@ -39,7 +39,7 @@ class Newspaper(models.Model):
     publishers = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     class Meta:
-        ordering = ["published_date", ]
+        ordering = ["-published_date", ]
 
     def __str__(self):
         return f"{self.title} ({self.published_date})"
