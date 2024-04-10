@@ -6,6 +6,11 @@ from newspaper.views import (
     TopicCreateView,
     TopicUpdateView,
     TopicDeleteView,
+    NewspaperListView,
+    NewspaperDetailView,
+    NewspaperCreateView,
+    NewspaperUpdateView,
+    NewspaperDeleteView,
 
 )
 
@@ -15,6 +20,11 @@ urlpatterns = [
     path("topics/create/", TopicCreateView.as_view(), name="topic_create"),
     path("topics/<int:pk>/update/", TopicUpdateView.as_view(), name="topic_update"),
     path("topics/<int:pk>/delete/", TopicDeleteView.as_view(), name="topic_delete"),
+    path("newspapers/", NewspaperListView.as_view(), name="newspaper_list"),
+    path("newspapers/create/", NewspaperCreateView.as_view(), name="newspaper_create"),
+    path("newspapers/<int:pk>/", NewspaperDetailView.as_view(), name="newspaper_detail"),
+    path("newspapers/<int:pk>/update/", NewspaperUpdateView.as_view(), name="newspaper_update"),
+    path("newspapers/<int:pk>/delete/", NewspaperDeleteView.as_view(), name="newspaper_delete"),
 ]
 
 app_name = "newspaper"
