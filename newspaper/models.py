@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 from newspaper_agency_website import settings
 
@@ -29,6 +30,9 @@ class Redactor(AbstractUser):
             f"{self.username} ({self.first_name} {self.last_name}), "
             f"years of experience: {self.years_of_experience}."
         )
+
+    def get_absolute_url(self):
+        return reverse("newspaper:redactor_detail", kwargs={"pk": self.pk})
 
 
 class Newspaper(models.Model):
