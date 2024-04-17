@@ -20,9 +20,9 @@ class Redactor(AbstractUser):
 
     class Meta:
         ordering = [
-            "username",
             "last_name",
-            "first_name"
+            "first_name",
+            "username",
         ]
 
     def __str__(self):
