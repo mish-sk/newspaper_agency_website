@@ -27,8 +27,7 @@ class Redactor(AbstractUser):
 
     def __str__(self):
         return(
-            f"{self.username} ({self.first_name} {self.last_name}), "
-            f"years of experience: {self.years_of_experience}."
+            f"{self.first_name} {self.last_name} ({self.username})"
         )
 
     def get_absolute_url(self):
