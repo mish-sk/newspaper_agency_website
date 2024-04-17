@@ -27,6 +27,7 @@ def index(request):
 
 class TopicListView(LoginRequiredMixin, generic.ListView):
     model = Topic
+    paginate_by = 10
 
 
 class TopicCreateView(LoginRequiredMixin, generic.CreateView):
@@ -48,6 +49,7 @@ class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
+    paginate_by = 10
 
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
@@ -73,6 +75,7 @@ class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = Redactor
+    paginate_by = 10
 
 
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
