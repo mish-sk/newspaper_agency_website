@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from newspaper.forms import RedactorForm
+from newspaper.forms import RedactorForm, NewspaperForm
 from newspaper.models import Topic, Newspaper, Redactor
 
 
@@ -54,7 +54,7 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
-    fields = "__all__"
+    form_class = NewspaperForm
     success_url = reverse_lazy("newspaper:newspaper_list")
 
 
@@ -65,7 +65,10 @@ class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
 class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
     fields = "__all__"
-    success_url = reverse_lazy("newspaper:newspaper_list")
+
+    def get_success_url(self):
+        updated_newspaper_id = self.object.pk
+        return reverse_lazy("newspaper:newspaper_detail", kwargs={"pk": updated_newspaper_id})
 
 
 class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -81,6 +84,7 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
     model = Redactor
     form_class = RedactorForm
+    success_url = reverse_lazy("newspaper:redactor_list")
 
 
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
@@ -90,7 +94,10 @@ class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
 class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Redactor
     form_class = RedactorForm
-    success_url = reverse_lazy("newspaper:redactor_list")
+
+    def get_success_url(self):
+        updated_redactor_id = self.object.pk
+        return reverse_lazy("newspaper:redactor_detail", kwargs={"pk": updated_redactor_id})
 
 
 class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
