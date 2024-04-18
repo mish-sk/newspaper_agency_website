@@ -34,6 +34,11 @@ class Redactor(AbstractUser):
         return reverse("newspaper:redactor_detail", kwargs={"pk": self.pk})
 
 
+    @property
+    def newspapers(self):
+        return Newspaper.objects.filter(publishers=self)
+
+
 class Newspaper(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
