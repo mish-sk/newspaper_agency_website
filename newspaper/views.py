@@ -153,6 +153,12 @@ class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        redactor = self.object
+        context['published_newspapers'] = redactor.newspaper_set.all()
+        return context
+
 
 class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Redactor
