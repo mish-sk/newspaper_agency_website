@@ -73,6 +73,30 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
     paginate_by = 10
 
+    def get_queryset(self) -> QuerySet:
+        queryset = Newspaper.objects.all()
+
+        topic_id = self.request.GET.get('topic')
+        if topic_id:
+            queryset = queryset.filter(topic_id=topic_id)
+
+        form = NewspaperSearchForm(self.request.GET)
+        if form.is_valid():
+            query = form.cleaned_data.get('name')
+
+            topic = form.cleaned_data.get('topic')
+
+            if query:
+                queryset = queryset.filter(title__icontains=query) | queryset.filter(content__icontains=query)
+
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(NewspaperListView, self).get_context_data(**kwargs)
+        title = self.request.GET.get("name", "")
+        context["search_form"] = NewspaperSearchForm(initial={"title": title})
+        context["topics"] = Topic.objects.all()
+        return context
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
