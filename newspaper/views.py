@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import QuerySet, Count
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -13,10 +14,18 @@ def index(request):
     topics = Topic.objects.all()
     newspapers = Newspaper.objects.all()
     redactors = Redactor.objects.all()
+
+    top_active_redactors = redactors.annotate(num_newspapers=Count('newspaper__publishers')).order_by('-num_newspapers')[:5]
+    recent_newspapers = newspapers.order_by('-published_date')[:5]
+    most_popular_topics = topics.annotate(num_newspapers=Count("newspaper")).order_by("-num_newspapers")[:5]
+
     context = {
         "topics": topics,
         "newspapers": newspapers,
-        "redactors": redactors
+        "redactors": redactors,
+        "top_active_redactors": top_active_redactors,
+        "recent_newspapers": recent_newspapers,
+        "most_popular_topics": most_popular_topics,
     }
     return render(
         request,
