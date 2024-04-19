@@ -18,7 +18,9 @@ class PublicNewspaperViewTest(TestCase):
         self.assertNotEqual(response.status_code, 200)
 
     def test_newspaper_detail_login_required(self):
-        response = self.client.get(reverse("newspaper:newspaper_detail", kwargs={"pk": 1}))
+        response = self.client.get(
+            reverse("newspaper:newspaper_detail", kwargs={"pk": 1})
+        )
         self.assertNotEqual(response.status_code, 200)
 
     def test_newspaper_create_login_required(self):
@@ -26,11 +28,15 @@ class PublicNewspaperViewTest(TestCase):
         self.assertNotEqual(response.status_code, 200)
 
     def test_newspaper_delete_login_required(self):
-        response = self.client.get(reverse("newspaper:newspaper_delete", kwargs={"pk": 1}))
+        response = self.client.get(
+            reverse("newspaper:newspaper_delete", kwargs={"pk": 1})
+        )
         self.assertNotEqual(response.status_code, 200)
 
     def test_newspaper_update_login_required(self):
-        response = self.client.get(reverse("newspaper:newspaper_update", kwargs={"pk": 1}))
+        response = self.client.get(
+            reverse("newspaper:newspaper_update", kwargs={"pk": 1})
+        )
         self.assertNotEqual(response.status_code, 200)
 
     def test_redactor_list_login_required(self):
@@ -38,7 +44,9 @@ class PublicNewspaperViewTest(TestCase):
         self.assertNotEqual(response.status_code, 200)
 
     def test_redactor_detail_login_required(self):
-        response = self.client.get(reverse("newspaper:redactor_detail", kwargs={"pk": 1}))
+        response = self.client.get(
+            reverse("newspaper:redactor_detail", kwargs={"pk": 1})
+        )
         self.assertNotEqual(response.status_code, 200)
 
     def test_redactor_create_login_required(self):
@@ -46,11 +54,15 @@ class PublicNewspaperViewTest(TestCase):
         self.assertNotEqual(response.status_code, 200)
 
     def test_redactor_delete_login_required(self):
-        response = self.client.get(reverse("newspaper:redactor_delete", kwargs={"pk": 1}))
+        response = self.client.get(
+            reverse("newspaper:redactor_delete", kwargs={"pk": 1})
+        )
         self.assertNotEqual(response.status_code, 200)
 
     def test_redactor_update_login_required(self):
-        response = self.client.get(reverse("newspaper:redactor_update", kwargs={"pk": 1}))
+        response = self.client.get(
+            reverse("newspaper:redactor_update", kwargs={"pk": 1})
+        )
         self.assertNotEqual(response.status_code, 200)
 
     def test_topic_list_login_required(self):
@@ -72,9 +84,7 @@ class PublicNewspaperViewTest(TestCase):
 
 class PrivateNewspaperViewTest(TestCase):
     def setUp(self) -> None:
-        self.topic = Topic.objects.create(
-            name="test_topic_name"
-        )
+        self.topic = Topic.objects.create(name="test_topic_name")
         self.redactor = get_user_model().objects.create(
             username="redactor",
             password="test_password1234",
@@ -101,7 +111,7 @@ class PrivateNewspaperViewTest(TestCase):
         response = self.client.get(reverse("newspaper:redactor_list"))
         self.assertEqual(
             list(response.context["redactor_list"]),
-            list(get_user_model().objects.all())
+            list(get_user_model().objects.all()),
         )
         self.assertTemplateUsed(response, "newspaper/redactor_list.html")
 
@@ -114,16 +124,13 @@ class PrivateNewspaperViewTest(TestCase):
     def test_retrieve_newspapers(self):
         response = self.client.get(reverse("newspaper:newspaper_list"))
         self.assertEqual(
-            list(response.context["newspaper_list"]),
-            list(Newspaper.objects.all())
+            list(response.context["newspaper_list"]), list(Newspaper.objects.all())
         )
         self.assertTemplateUsed(response, "newspaper/newspaper_list.html")
 
     def test_retrieve_topics(self):
         response = self.client.get(reverse("newspaper:topic_list"))
         self.assertEqual(
-            list(response.context["topic_list"]),
-            list(Topic.objects.all())
+            list(response.context["topic_list"]), list(Topic.objects.all())
         )
         self.assertTemplateUsed(response, "newspaper/topic_list.html")
-

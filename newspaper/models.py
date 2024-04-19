@@ -9,7 +9,9 @@ class Topic(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
     class Meta:
-        ordering = ["name", ]
+        ordering = [
+            "name",
+        ]
 
     def __str__(self):
         return self.name
@@ -26,13 +28,10 @@ class Redactor(AbstractUser):
         ]
 
     def __str__(self):
-        return(
-            f"{self.first_name} {self.last_name} ({self.username})"
-        )
+        return f"{self.first_name} {self.last_name} ({self.username})"
 
     def get_absolute_url(self):
         return reverse("newspaper:redactor_detail", kwargs={"pk": self.pk})
-
 
     @property
     def newspapers(self):
@@ -47,7 +46,9 @@ class Newspaper(models.Model):
     publishers = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     class Meta:
-        ordering = ["-published_date", ]
+        ordering = [
+            "-published_date",
+        ]
 
     def __str__(self):
         return f"{self.title} ({self.published_date})"
