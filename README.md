@@ -2,6 +2,10 @@
 
 Manage your newspaper agency with ease! Keep track of redactors, articles, and topics effortlessly.
 
+## Check it out
+
+[Newspaper agency project deployed to Render](https://newspaper-agency-3nz5.onrender.com)
+
 ## Features
 
 - View the number of redactors, articles, and topics in your agency
