@@ -34,8 +34,8 @@ DEBUG = "RENDER" not in os.environ
 
 
 ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1"
+    "127.0.0.1",
+    "newspaper-agency-3nz5.onrender.com",
 ]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
