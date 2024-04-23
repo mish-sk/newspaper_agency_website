@@ -33,7 +33,16 @@ source venv/bin/activate (on macOS)
 pip install -r requirements.txt
 python manage.py runserver
 ```
+You can use this credentials to login:
+```
+login: admin
+password:admin
+```
 
+or create new superuser
+```
+python manage.py createsuperuser
+```
 
 ## License
 
